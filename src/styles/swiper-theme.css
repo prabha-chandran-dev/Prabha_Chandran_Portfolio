@@ -1,0 +1,11 @@
+/* swiper-theme.css */
+
+.swiper-pagination-bullet {
+  background: #6b21a8; /* Tailwind's purple-800 */
+  opacity: 0.6;
+}
+
+.swiper-pagination-bullet-active {
+  background: #c084fc; /* Tailwind's purple-400 */
+  opacity: 1;
+}
