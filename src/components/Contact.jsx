@@ -1,171 +1,189 @@
-// // src/components/Contact.jsx
-// import { useRef, useState } from "react";
-// import emailjs from "@emailjs/browser";
 
-// const Contact = () => {
-//     const form = useRef();
-//     const [isSent, setIsSent] = useState(false);
-//     const [error, setError] = useState("");
-
-//     const sendEmail = (e) => {
-//         e.preventDefault();
-
-//         emailjs
-//             .sendForm(
-//                 "service_ah3t36g",     // e.g. service_abcd123
-//                 "template_fr2zcxs",    // e.g. template_xyz123
-//                 form.current,
-//                 "aVB1U72pwlERUfqa0"      // e.g. xLJz0n_something
-//             )
-//             .then(
-//                 () => {
-//                     setIsSent(true);
-//                     form.current.reset();
-//                     setError("");
-//                 },
-//                 (err) => {
-//                     console.error("FAILED...", err.text);
-//                     setError("Something went wrong. Please try again.");
-//                 }
-//             );
-//     };
-
-//     return (
-//         <section id="contact" className="py-16 bg-[#0c011d] text-white">
-//             <div className="max-w-4xl mx-auto px-6">
-//                 <h2 className="text-4xl font-bold text-purple-400 mb-10 text-center">Contact Me</h2>
-
-//                 <form ref={form} onSubmit={sendEmail} className="space-y-5">
-//                     <input
-//                         type="text"
-//                         name="name"
-//                         placeholder="Your Name"
-//                         required
-//                         className="w-full p-3 rounded bg-[#1b0b2e] border border-purple-700 text-white"
-//                     />
-//                     <input
-//                         type="email"
-//                         name="email"
-//                         placeholder="Your Email"
-//                         required
-//                         className="w-full p-3 rounded bg-[#1b0b2e] border border-purple-700 text-white"
-//                     />
-
-//                     <textarea
-//                         name="message"
-//                         placeholder="Your Message"
-//                         required
-//                         rows="5"
-//                         className="w-full p-3 rounded bg-[#1b0b2e] border border-purple-700 text-white"
-//                     ></textarea>
-
-//                     <button
-//                         type="submit"
-//                         className="bg-purple-700 hover:bg-purple-600 px-6 py-3 rounded text-white font-semibold transition"
-//                     >
-//                         Send Message
-//                     </button>
-
-//                     {isSent && (
-//                         <p className="text-green-400 mt-2">Message sent successfully! ✅</p>
-//                     )}
-//                     {error && <p className="text-red-400 mt-2">{error}</p>}
-//                 </form>
-//             </div>
-//         </section>
-//     );
-// };
-
-// export default Contact;
-
-
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import emailjs from "@emailjs/browser";
+import { motion } from "framer-motion";
+import confetti from "canvas-confetti";
+import { Github, Linkedin, Twitter } from "lucide-react";
 
 const Contact = () => {
-  const form = useRef();
-  const [isSent, setIsSent] = useState(false);
-  const [error, setError] = useState("");
+    const form = useRef();
+    const [isSent, setIsSent] = useState(false);
+    const [error, setError] = useState("");
 
-  const sendEmail = (e) => {
-    e.preventDefault();
+    const sendEmail = (e) => {
+        e.preventDefault();
 
-    emailjs
-      .sendForm(
-        "service_ah3t36g",
-        "template_fr2zcxs",
-        form.current,
-        "aVB1U72pwlERUfqa0"
-      )
-      .then(
-        () => {
-          setIsSent(true);
-          form.current.reset();
-          setError("");
-        },
-        (err) => {
-          console.error("FAILED...", err.text);
-          setError("Something went wrong. Please try again.");
-        }
-      );
-  };
+        emailjs
+            .sendForm(
+                "service_ah3t36g",
+                "template_fr2zcxs",
+                form.current,
+                "aVB1U72pwlERUfqa0"
+            )
+            .then(
+                () => {
+                    setIsSent(true);
+                    form.current.reset();
+                    setError("");
+                    launchConfetti();
+                    setTimeout(() => setIsSent(false), 4000);
+                },
+                (err) => {
+                    console.error("FAILED...", err.text);
+                    setError("Something went wrong. Please try again.");
+                }
+            );
+    };
 
-  return (
-    <section
-      id="contact"
-      className="scroll-mt-8 min-h-screen py-16 px-6 bg-gradient-to-br from-[#0d011d] via-[#1a0133] to-[#100023] text-white"
-    >
-      <div className="max-w-4xl mx-auto">
-        <h2 className="text-4xl font-bold text-purple-400 mb-10 text-center">
-          Contact Me
-        </h2>
+    const launchConfetti = () => {
+        confetti({
+            particleCount: 100,
+            spread: 70,
+            origin: { y: 0.6 },
+        });
+    };
 
-        <form
-          ref={form}
-          onSubmit={sendEmail}
-          className="space-y-6 bg-[#1b0b2e] border border-purple-700 p-8 rounded-xl shadow-lg"
+    useEffect(() => {
+  const container = document.querySelector(".bubble-container");
+
+  const interval = setInterval(() => {
+    const bubble = document.createElement("div");
+    bubble.className = "bubble";
+    bubble.style.left = `${Math.random() * 100}%`;
+    bubble.style.width = `${Math.random() * 12 + 8}px`;
+    bubble.style.height = `${Math.random() * 12 + 8}px`;
+    bubble.style.boxShadow = "0 0 8px rgba(255,255,255,0.2)";
+    container.appendChild(bubble);
+    setTimeout(() => bubble.remove(), 6000);
+  }, 700);
+
+  return () => clearInterval(interval);
+}, []);
+
+
+    return (
+        <section
+            id="contact"
+            className="relative scroll-mt-8 min-h-screen py-20 pb-0 px-6 bg-gradient-to-br from-[#0d011d] via-[#1a0133] to-[#100023] text-white "
         >
-          <input
-            type="text"
-            name="name"
-            placeholder="Your Name"
-            required
-            className="w-full p-3 rounded bg-[#2a1d3e] border border-purple-600 text-white placeholder-gray-400"
-          />
-          <input
-            type="email"
-            name="email"
-            placeholder="Your Email"
-            required
-            className="w-full p-3 rounded bg-[#2a1d3e] border border-purple-600 text-white placeholder-gray-400"
-          />
-          <textarea
-            name="message"
-            placeholder="Your Message"
-            required
-            rows="5"
-            className="w-full p-3 rounded bg-[#2a1d3e] border border-purple-600 text-white placeholder-gray-400"
-          ></textarea>
+            <div className="bubble-container absolute inset-0 -z-10 overflow-hidden"></div>
 
-          <button
-            type="submit"
-            className="w-full bg-purple-700 hover:bg-purple-600 px-6 py-3 rounded text-white font-semibold transition"
-          >
-            Send Message
-          </button>
+            {/* Floating background bubbles */}
+            <style>{`
+  .bubble {
+    position: absolute;
+    bottom: -60px;
+    width: ${Math.random() * 12 + 8}px;
+    height: ${Math.random() * 12 + 8}px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    animation: floatUp 6s ease-in infinite;
+    z-index: 0;
+  }
+  @keyframes floatUp {
+    0% { transform: translateY(0) scale(1); opacity: 0.6; }
+    100% { transform: translateY(-100vh) scale(0.4); opacity: 0; }
+  }
+`}</style>
 
-          {isSent && (
-            <p className="text-green-400 mt-2 text-center">
-              Message sent successfully! ✅
-            </p>
-          )}
-          {error && (
-            <p className="text-red-400 mt-2 text-center">{error}</p>
-          )}
-        </form>
-      </div>
-    </section>
-  );
+            <div className="max-w-3xl mx-auto relative z-10">
+                <motion.h2
+                    initial={{ opacity: 0, y: -30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6 }}
+                    className="text-4xl font-bold text-purple-400 mb-10 text-center"
+                >
+                    Let's Connect
+                </motion.h2>
+
+                <motion.form
+                    ref={form}
+                    onSubmit={sendEmail}
+                    initial={{ opacity: 0, y: 40 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.7 }}
+                    className="glass border border-purple-600 backdrop-blur-md p-8 rounded-2xl shadow-2xl space-y-6"
+                >
+                    <input
+                        type="text"
+                        name="name"
+                        placeholder="Your Name"
+                        required
+                        className="w-full p-3 rounded-lg bg-[#2a1d3e]/60 border border-purple-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-400 transition"
+                    />
+                    <input
+                        type="email"
+                        name="email"
+                        placeholder="Your Email"
+                        required
+                        className="w-full p-3 rounded-lg bg-[#2a1d3e]/60 border border-purple-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-400 transition"
+                    />
+                    <textarea
+                        name="message"
+                        placeholder="Your Message"
+                        required
+                        rows="5"
+                        className="w-full p-3 rounded-lg bg-[#2a1d3e]/60 border border-purple-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-400 transition"
+                    ></textarea>
+
+                    <motion.button
+                        whileHover={{ scale: 1.03 }}
+                        whileTap={{ scale: 0.98 }}
+                        type="submit"
+                        className="w-full bg-purple-700 hover:bg-purple-600 px-6 py-3 rounded-lg text-white font-semibold transition duration-300"
+                    >
+                        Send Message
+                    </motion.button>
+
+                    {isSent && (
+                        <motion.p
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            className="text-green-400 text-center mt-4"
+                        >
+                            ✅ Message sent successfully!
+                        </motion.p>
+                    )}
+                    {error && (
+                        <p className="text-red-400 text-center mt-4">{error}</p>
+                    )}
+                </motion.form>
+
+                {/* Social Icons */}
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.5 }}
+                    className="flex justify-center mt-10 space-x-6"
+                >
+                    <a
+                        href="https://github.com/yourusername"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="hover:text-purple-400 transition"
+                    >
+                        <Github size={28} />
+                    </a>
+                    <a
+                        href="https://linkedin.com/in/yourusername"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="hover:text-purple-400 transition"
+                    >
+                        <Linkedin size={28} />
+                    </a>
+                    <a
+                        href="https://twitter.com/yourusername"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="hover:text-purple-400 transition"
+                    >
+                        <Twitter size={28} />
+                    </a>
+                </motion.div>
+            </div>
+        </section>
+    );
 };
 
 export default Contact;

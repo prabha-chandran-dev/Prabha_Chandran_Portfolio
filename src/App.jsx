@@ -1,5 +1,6 @@
 import React from "react";
 import ThemeProvider from "./components/ThemeProvider";
+import ScrollToTopButton from "./components/ScrollToTopButton";
 import Navbar from "./components/Navbar";
 import Home from "./components/Home";
 import Awards from "./components/Awards";
@@ -31,6 +32,7 @@ function App() {
         <Certifications />
         <Awards />
         <Contact />
+        <ScrollToTopButton />
       </main>
     </div>
   );
