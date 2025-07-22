@@ -3,7 +3,8 @@ import { useRef, useState, useEffect } from "react";
 import emailjs from "@emailjs/browser";
 import { motion } from "framer-motion";
 import confetti from "canvas-confetti";
-import { Github, Linkedin, Twitter } from "lucide-react";
+import { Github, Linkedin, Mail } from "lucide-react";
+import { socialLinks } from "../constants/socialLinks"; // Adjust path as needed
 
 const Contact = () => {
     const form = useRef();
@@ -44,21 +45,21 @@ const Contact = () => {
     };
 
     useEffect(() => {
-  const container = document.querySelector(".bubble-container");
+        const container = document.querySelector(".bubble-container");
 
-  const interval = setInterval(() => {
-    const bubble = document.createElement("div");
-    bubble.className = "bubble";
-    bubble.style.left = `${Math.random() * 100}%`;
-    bubble.style.width = `${Math.random() * 12 + 8}px`;
-    bubble.style.height = `${Math.random() * 12 + 8}px`;
-    bubble.style.boxShadow = "0 0 8px rgba(255,255,255,0.2)";
-    container.appendChild(bubble);
-    setTimeout(() => bubble.remove(), 6000);
-  }, 700);
+        const interval = setInterval(() => {
+            const bubble = document.createElement("div");
+            bubble.className = "bubble";
+            bubble.style.left = `${Math.random() * 100}%`;
+            bubble.style.width = `${Math.random() * 12 + 8}px`;
+            bubble.style.height = `${Math.random() * 12 + 8}px`;
+            bubble.style.boxShadow = "0 0 8px rgba(255,255,255,0.2)";
+            container.appendChild(bubble);
+            setTimeout(() => bubble.remove(), 6000);
+        }, 700);
 
-  return () => clearInterval(interval);
-}, []);
+        return () => clearInterval(interval);
+    }, []);
 
 
     return (
@@ -66,6 +67,12 @@ const Contact = () => {
             id="contact"
             className="relative scroll-mt-8 min-h-screen py-20 pb-0 px-6 bg-gradient-to-br from-[#0d011d] via-[#1a0133] to-[#100023] text-white "
         >
+                  {/* Background Glow Bubbles */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        <div className="absolute w-64 h-64 bg-purple-800 rounded-full mix-blend-lighten  opacity-20 top-20 left-10 animate-pulse" />
+        <div className="absolute w-48 h-48 bg-pink-700 rounded-full mix-blend-lighten opacity-20 bottom-10 right-10 animate-pulse" />
+      </div>
+
             <div className="bubble-container absolute inset-0 -z-10 overflow-hidden"></div>
 
             {/* Floating background bubbles */}
@@ -157,7 +164,7 @@ const Contact = () => {
                     className="flex justify-center mt-10 space-x-6"
                 >
                     <a
-                        href="https://github.com/yourusername"
+                         href={socialLinks.github}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="hover:text-purple-400 transition"
@@ -165,7 +172,7 @@ const Contact = () => {
                         <Github size={28} />
                     </a>
                     <a
-                        href="https://linkedin.com/in/yourusername"
+                        href={socialLinks.linkedin}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="hover:text-purple-400 transition"
@@ -173,12 +180,12 @@ const Contact = () => {
                         <Linkedin size={28} />
                     </a>
                     <a
-                        href="https://twitter.com/yourusername"
+                        href={socialLinks.gmail}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="hover:text-purple-400 transition"
                     >
-                        <Twitter size={28} />
+                        <Mail size={28} />
                     </a>
                 </motion.div>
             </div>

@@ -8,6 +8,7 @@ import Projects from "./components/Projects";
 import Skills from "./components/Skills";
 import Contact from "./components/Contact";
 import Certifications from "./components/Certifications";
+
 // function App() {
 //   return (
 //     <div className="font-sans">

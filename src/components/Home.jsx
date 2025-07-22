@@ -82,7 +82,25 @@ const Home = () => {
         <div className="absolute w-64 h-64 bg-purple-800 rounded-full mix-blend-lighten  opacity-20 top-20 left-10 animate-pulse" />
         <div className="absolute w-48 h-48 bg-pink-700 rounded-full mix-blend-lighten opacity-20 bottom-10 right-10 animate-pulse" />
       </div>
+ <div className="bubble-container absolute inset-0 -z-10 overflow-hidden"></div>
 
+            {/* Floating background bubbles */}
+            <style>{`
+  .bubble {
+    position: absolute;
+    bottom: -60px;
+    width: ${Math.random() * 12 + 8}px;
+    height: ${Math.random() * 12 + 8}px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    animation: floatUp 6s ease-in infinite;
+    z-index: 0;
+  }
+  @keyframes floatUp {
+    0% { transform: translateY(0) scale(1); opacity: 0.6; }
+    100% { transform: translateY(-100vh) scale(0.4); opacity: 0; }
+  }
+`}</style>
       <div className="max-w-7xl mx-auto w-full grid md:grid-cols-2 items-center gap-12 z-10 relative">
         {/* LEFT TEXT */}
         <motion.div
