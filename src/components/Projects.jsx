@@ -107,10 +107,13 @@ const Projects = () => {
         className="text-center mb-12"
       >
         <h2 className="text-4xl font-bold text-purple-400 mb-2">
-          Projects
-        </h2>
-        <p className="text-gray-400">A showcase of some of my work:</p>
+          ShowCase of Projects        </h2>
+<p className="text-center text-gray-200 mb-8">
+  🚀 These are my <span className="font-semibold text-white">academic/college projects</span>. For real-time industry experience, <span className="font-semibold text-purple-400 animate-pulse">📄 check my resume</span> via the top-right button.
+</p>
+
       </motion.div>
+
 
       <motion.div
         initial={{ opacity: 0 }}
@@ -128,16 +131,16 @@ const Projects = () => {
           >
             {/* Thumbnail */}
             <img
-              src={profileImg}
+              src={project.image}
               alt={project.title}
               className="w-full h-48 object-cover"
             />
 
             {/* Hover Overlay */}
             <div className="absolute inset-0 bg-black bg-opacity-90 opacity-0 group-hover:opacity-100 transition duration-300 flex flex-col justify-center items-center px-4 text-center z-20">
-              <h3 className="text-lg font-semibold text-purple-300 mb-2">
+              {/* <h3 className="text-lg font-semibold text-purple-300 mb-2">
                 {project.title}
-              </h3>
+              </h3> */}
 
               <p className="text-sm text-gray-300 mb-3">
                 {project.description}
@@ -185,7 +188,7 @@ const Projects = () => {
         className="mt-14 text-center"
       >
         <a
-          href="https://github.com/yourusername"
+          href="https://github.com/BB-Design/Self-Learning-Projects"
           target="_blank"
           rel="noopener noreferrer"
           className="inline-block bg-purple-700 hover:bg-purple-600 text-white font-medium px-6 py-3 rounded transition"

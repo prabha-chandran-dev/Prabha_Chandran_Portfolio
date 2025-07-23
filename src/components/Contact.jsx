@@ -45,21 +45,35 @@ const Contact = () => {
     };
 
     useEffect(() => {
-        const container = document.querySelector(".bubble-container");
+  const container = document.querySelector(".bubble-container");
 
-        const interval = setInterval(() => {
-            const bubble = document.createElement("div");
-            bubble.className = "bubble";
-            bubble.style.left = `${Math.random() * 100}%`;
-            bubble.style.width = `${Math.random() * 12 + 8}px`;
-            bubble.style.height = `${Math.random() * 12 + 8}px`;
-            bubble.style.boxShadow = "0 0 8px rgba(255,255,255,0.2)";
-            container.appendChild(bubble);
-            setTimeout(() => bubble.remove(), 6000);
-        }, 700);
+  const interval = setInterval(() => {
+    const bubble = document.createElement("div");
+    bubble.className = "bubble";
 
-        return () => clearInterval(interval);
-    }, []);
+    const size = Math.random() * 12 + 8; // 8–20px
+    const left = Math.random() * 100; // 0%–100%
+    const duration = Math.random() * 8 + 6; // 6–14s
+
+    bubble.style.left = `${left}%`;
+    bubble.style.width = `${size}px`;
+    bubble.style.height = `${size}px`;
+    bubble.style.animation = `floatUp ${duration}s ease-in forwards`;
+    bubble.style.background = "rgba(255,255,255,0.2)";
+    bubble.style.position = "absolute";
+    bubble.style.bottom = "-40px";
+    bubble.style.borderRadius = "9999px";
+    bubble.style.zIndex = "0";
+    bubble.style.pointerEvents = "none";
+    bubble.style.boxShadow = "0 0 8px rgba(255,255,255,0.1)";
+
+    container.appendChild(bubble);
+    setTimeout(() => bubble.remove(), duration * 1000);
+  }, 500);
+
+  return () => clearInterval(interval);
+}, []);
+
 
 
     return (
@@ -76,22 +90,19 @@ const Contact = () => {
             <div className="bubble-container absolute inset-0 -z-10 overflow-hidden"></div>
 
             {/* Floating background bubbles */}
-            <style>{`
-  .bubble {
-    position: absolute;
-    bottom: -60px;
-    width: ${Math.random() * 12 + 8}px;
-    height: ${Math.random() * 12 + 8}px;
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 50%;
-    animation: floatUp 6s ease-in infinite;
-    z-index: 0;
-  }
+          <style>{`
   @keyframes floatUp {
-    0% { transform: translateY(0) scale(1); opacity: 0.6; }
-    100% { transform: translateY(-100vh) scale(0.4); opacity: 0; }
+    0% {
+      transform: translateY(0) scale(1);
+      opacity: 0.7;
+    }
+    100% {
+      transform: translateY(-100vh) scale(0.4);
+      opacity: 0;
+    }
   }
 `}</style>
+
 
             <div className="max-w-3xl mx-auto relative z-10">
                 <motion.h2
