@@ -180,7 +180,7 @@ const Home = () => {
   return (
     <section
       id="home"
-      className="relative min-h-screen bg-gradient-to-br from-[#0d011d] via-[#1a0133] to-[#100023] text-white flex items-center px-6 py-12 overflow-hidden"
+      className="scroll-mt-24 relative min-h-screen bg-gradient-to-br from-[#0d011d] via-[#1a0133] to-[#100023] text-white flex items-center px-6 py-12 "
     >
       {/* 🔮 Background Glow */}
       <div className="absolute inset-0 z-0 pointer-events-none">
@@ -206,7 +206,7 @@ const Home = () => {
       `}</style>
 
       {/* 🌟 Main Content */}
-      <div className="max-w-7xl mx-auto w-full grid md:grid-cols-2 items-center gap-12 z-10 relative">
+      <div className="max-w-7xl mx-auto w-full grid md:grid-cols-2 items-center gap-12 z-10 relative mt-10">
         {/* LEFT */}
         <motion.div
           initial={{ x: -60, opacity: 0 }}

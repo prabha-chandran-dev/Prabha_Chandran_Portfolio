@@ -175,6 +175,8 @@ const Awards = () => {
         >
           {awards.map((award, index) => (
             <SwiperSlide key={index}>
+
+              <div className="min-h-[60vh] sm:min-h-[70vh]">
               <motion.div
                 whileHover={{ scale: 1.02 }}
                 onHoverStart={index === 0 ? triggerCelebration : undefined}
@@ -187,14 +189,16 @@ const Awards = () => {
               >
                 {index === 0 && <Confetti key={confettiKey} numberOfPieces={150} recycle={false} />}
 
-                <div className="relative w-full h-[28rem]">
+             <div className="relative w-full aspect-[16/10] sm:aspect-[16/9] max-h-[34rem] mx-auto">
+
                   <img
                     src={award.image}
                     alt={award.title}
                     className="w-full h-full object-cover"
                   />
 
-                  <div className="absolute inset-0 bg-black bg-opacity-90 text-white opacity-0 group-hover:opacity-100 transition duration-300 flex flex-col justify-center items-center text-center p-8 z-10">
+                 <div className="absolute inset-0 bg-black bg-opacity-90 text-white opacity-0 group-hover:opacity-100 transition duration-300 flex flex-col justify-center items-center text-center px-4 py-6 z-10 overflow-y-auto max-h-full">
+
 
                     {index === 1 && (
                       <img
@@ -267,6 +271,7 @@ const Awards = () => {
                   </div>
                 </div>
               </motion.div>
+              </div>
             </SwiperSlide>
           ))}
         </Swiper>
