@@ -27,6 +27,7 @@ function App() {
 <div className="bg-[#0d011d] text-white min-h-screen w-full">
       <Navbar />
       <main className="pt-20"> {/* Push content below the fixed nav */}
+        
         <Home />
         <Skills />
         <Projects />
