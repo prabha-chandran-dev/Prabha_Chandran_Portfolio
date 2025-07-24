@@ -100,16 +100,16 @@ const Home = () => {
             </a>
 
             <div className="flex gap-4 text-3xl">
-              <a href="#" className="bg-purple-900 hover:bg-purple-700 p-3 rounded-full transition">
+              <a href="https://www.geeksforgeeks.org/user/cprabh502j/" className="bg-purple-900 hover:bg-purple-700 p-3 rounded-full transition">
                 <SiGeeksforgeeks />
               </a>
-              <a href="#" className="bg-purple-900 hover:bg-purple-700 p-3 rounded-full transition">
+              <a href="https://www.linkedin.com/in/prabhachandran/" className="bg-purple-900 hover:bg-purple-700 p-3 rounded-full transition">
                 <FaLinkedin />
               </a>
-              <a href="#" className="bg-purple-900 hover:bg-purple-700 p-3 rounded-full transition">
+              <a href="https://github.com/prabha-chandran-dev" className="bg-purple-900 hover:bg-purple-700 p-3 rounded-full transition">
                 <FaGithub />
               </a>
-              <a href="#" className="bg-purple-900 hover:bg-purple-700 p-3 rounded-full transition">
+              <a href="https://www.behance.net/prabhac/projects" className="bg-purple-900 hover:bg-purple-700 p-3 rounded-full transition">
                 <FaBehance />
               </a>
             </div>
